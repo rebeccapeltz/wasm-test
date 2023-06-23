@@ -35,3 +35,6 @@ yarn build-rust
 # or
 pnpm build-rust
 ```
+
+https://github.com/vercel/next.js/tree/canary/examples/with-webassembly
+
