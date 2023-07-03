@@ -1,8 +1,4 @@
-import AssemblyComponent from '../components/AssemblyComponent'
-import Hello from '../components/Hello'
-import Test from '../components/Test'
 import type {AssemblyExports} from '../wasm'
-import { GetServerSideProps,NextPage} from 'next'
 import TableRow from '../components/TableRow'
 interface Primes extends Array<Number> {}
 type Props = {
@@ -10,10 +6,6 @@ type Props = {
 };
 
 export default function Page({primes}: Props) {
-  // const { query } = useRouter()
-  // const number = parseInt(query.number as string) || 30
-  // const primeOutut = query.primeOutput as string
-  // console.log(JSON.stringify(props.primes,null,2))
   console.log("100",primes[100])
   return (
     <div>
@@ -24,7 +16,7 @@ export default function Page({primes}: Props) {
                 </tr>
             </thead>
             <tbody>
-                {primes.map((index,prime) => <TableRow prime={prime.toString()} index={index.toString()} />)}
+                {primes.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
             </tbody>
 
         </table>
