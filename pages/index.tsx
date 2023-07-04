@@ -1,4 +1,4 @@
-import type {AssemblyExports} from '../wasm'
+// import type {AssemblyExports} from '../wasm'
 import TableRow from '../components/TableRow'
 interface Primes extends Array<Number> {}
 type Props = {
@@ -43,19 +43,24 @@ export default function Page({primes}: Props) {
   return {props: {"primes":primeArray}}
 } */}
 
-export const getStaticProps = async () => {
-    const exports = (await import('../release.wasm')) as AssemblyExports
-    const {isPrime: isPrime,add: add,get1000Primes: get1000Primes,getFibonacci1000: getFibonacci1000, memory:memory} = exports
-    get1000Primes()
-    const wasmByteMemoryArray = new Uint32Array(memory.buffer);
+// export const getStaticProps = async () => {
+//     const exports = (await import('../release.wasm')) as AssemblyExports
+//     const {isPrime: isPrime,add: add,get1000Primes: get1000Primes,getFibonacci1000: getFibonacci1000, memory:memory} = exports
+//     get1000Primes()
+//     const wasmByteMemoryArray = new Uint32Array(memory.buffer);
   
-    // Get 1st 1000
-    const prime1000 = wasmByteMemoryArray.slice(0,1000);
-    let primeArray:number[] = [];
-    let primeOutput = '';
-    for (let i=0;i<prime1000.length;i++){
-      primeOutput += `${i}:${prime1000[i]}\n`;
-      primeArray.push(prime1000[i])
-    }
-    return {props: {"primes":primeArray}}
+//     // Get 1st 1000
+//     const prime1000 = wasmByteMemoryArray.slice(0,1000);
+//     let primeArray:number[] = [];
+//     let primeOutput = '';
+//     for (let i=0;i<prime1000.length;i++){
+//       primeOutput += `${i}:${prime1000[i]}\n`;
+//       primeArray.push(prime1000[i])
+//     }
+//     return {props: {"primes":primeArray}}
+// }
+export const getStaticProps = async () => {
+     const primeArray = [1,2,3,5,7];
+      return {props: {"primes":primeArray}}
 }
+

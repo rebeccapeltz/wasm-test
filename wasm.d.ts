@@ -1,6 +1,3 @@
-// export interface AddModuleExports {
-//   add_one(number: Number): Number
-// }
 export interface AssemblyExports {
   get1000Primes(): void;
   isPrime(): boolean;
