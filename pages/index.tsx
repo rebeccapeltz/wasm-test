@@ -41,7 +41,7 @@ export default function Page({primes}: InferGetServerSidePropsType<typeof getSer
                 </tr>
             </thead>
             <tbody>
-                {primes.arr.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
+                {primes.values.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
             </tbody>
 
         </table>
