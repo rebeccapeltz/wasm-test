@@ -1,12 +1,25 @@
 // import type {AssemblyExports} from '../wasm'
-import TableRow from '../components/TableRow'
-interface Primes extends Array<Number> {}
-type Props = {
-  primes: Primes
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+
+type Primes = {
+  arr: Number[]
 };
 
-export default function Page({primes}: Props) {
-  console.log("100",primes[100])
+
+export const getServerSideProps: GetServerSideProps<{
+  primes: Primes
+}> = async () => {
+  const res = await fetch('https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes')
+  const primes = await res.json()
+  return { props: { primes } }
+}
+
+import TableRow from '../components/TableRow'
+
+
+export default function Page({primes}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log("100",primes.arr[100])
+  
   return (
     <div>
         <table>
@@ -16,7 +29,7 @@ export default function Page({primes}: Props) {
                 </tr>
             </thead>
             <tbody>
-                {primes.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
+                {primes.arr.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
             </tbody>
 
         </table>
@@ -59,8 +72,9 @@ export default function Page({primes}: Props) {
 //     }
 //     return {props: {"primes":primeArray}}
 // }
-export const getStaticProps = async () => {
-     const primeArray = [1,2,3,5,7];
-      return {props: {"primes":primeArray}}
-}
+// export const getStaticProps = async () => {
+//      // fetch https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes
+//      const primeArray = [1,2,3,5,7];
+//       return {props: {"primes":primeArray}}
+// }
 

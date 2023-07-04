@@ -31,7 +31,15 @@ export default async function handler() {
   //   fibs.push(fib1000[i])
   // }
   // console.log(primes)
-  return new Response(`primes: ${primes}`)
+  const json = {"primes":primes}
+  return new Response(
+    JSON.stringify(json, null, 2),
+    {
+      headers: {
+        'content-type': 'application/json;charset=UTF-8',
+      }
+    }
+  )
 }
 
 
