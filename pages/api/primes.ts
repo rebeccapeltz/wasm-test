@@ -16,7 +16,7 @@ export default async function handler() {
   const exports = instance.exports as AssemblyExports
   const {memory,isPrime,get1000Primes,getFibonacci1000,add}= exports
   get1000Primes();
-  getFibonacci1000();
+  // getFibonacci1000();
   const wasmByteMemoryArray = new Uint32Array(memory.buffer);
 
   // Get 1st 1000
@@ -25,13 +25,13 @@ export default async function handler() {
   for (let i=0;i<prime1000.length;i++){
     primes.push(prime1000[i])
   }
-  const fib1000 = wasmByteMemoryArray.slice(1000,1999)
-  const fibs = [];
-  for (let i=0;i<fib1000.length;i++){
-    fibs.push(fib1000[i])
-  }
+  // const fib1000 = wasmByteMemoryArray.slice(1000,1999)
+  // const fibs = [];
+  // for (let i=0;i<fib1000.length;i++){
+  //   fibs.push(fib1000[i])
+  // }
   // console.log(primes)
-  return new Response(`primes: ${primes},fibs: ${fibs}`)
+  return new Response(`primes: ${primes}`)
 }
 
 
