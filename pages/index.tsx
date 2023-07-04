@@ -2,24 +2,36 @@
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
 type Primes = {
-  arr: Number[]
+  values: Number[]
 };
+interface Props {
+  primes: Primes;
+}
 
 
-export const getServerSideProps: GetServerSideProps<{
-  primes: Primes
-}> = async () => {
-  const res = await fetch('https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes')
-  const primes = await res.json()
-  return { props: { primes } }
+export const getServerSideProps: GetServerSideProps<{primes:Primes}> = async (context) => {
+  const API_URL = 'https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes';
+  const res = await fetch(API_URL)
+  const data = await res.json()
+  const primes = data.values;
+  if (primes == null){
+    return {
+      notFound: true
+    }
+  } else {
+    return {
+      props: primes
+    }
+  }
 }
 
 import TableRow from '../components/TableRow'
 
 
 export default function Page({primes}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log("100",primes.arr[100])
-  
+  debugger
+  console.log("100",primes.values[100])
+
   return (
     <div>
         <table>

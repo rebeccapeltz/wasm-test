@@ -1,6 +1,7 @@
 export const config = { runtime: 'edge' }
 
 import type { AssemblyExports } from '../../wasm'
+import { NextRequest, NextResponse } from 'next/server';
 
 
 // import type { Prime1000Exports } from '../../wasm'
@@ -25,21 +26,9 @@ export default async function handler() {
   for (let i=0;i<prime1000.length;i++){
     primes.push(prime1000[i])
   }
-  // const fib1000 = wasmByteMemoryArray.slice(1000,1999)
-  // const fibs = [];
-  // for (let i=0;i<fib1000.length;i++){
-  //   fibs.push(fib1000[i])
-  // }
-  // console.log(primes)
-  const json = {"primes":primes}
-  return new Response(
-    JSON.stringify(json, null, 2),
-    {
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-      }
-    }
-  )
+  return NextResponse.json({
+    values: primes,
+  });
 }
 
 
