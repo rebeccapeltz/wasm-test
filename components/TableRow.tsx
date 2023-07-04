@@ -6,9 +6,9 @@ interface IProps {
  }
 // deconstructed props
 export default function TableRow({prime,index}:IProps) {
-debugger
+// debugger
   return (
-        <tr key={prime}>
+        <tr>
             <td>{prime}</td>
             <td>{index}</td>
         </tr>

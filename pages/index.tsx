@@ -1,15 +1,16 @@
 // import type {AssemblyExports} from '../wasm'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-type Primes = {
-  values: Number[]
-};
+// type Primes = {
+//   values: Number[]
+// };
+
 interface Props {
-  primes: Primes;
+  primes: Number[];
 }
 
 
-export const getServerSideProps: GetServerSideProps<{primes:Primes}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{primes:Number[]}> = async (context) => {
   const API_URL = 'https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes';
   const res = await fetch(API_URL)
   const data = await res.json()
@@ -20,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<{primes:Primes}> = async (co
     }
   } else {
     return {
-      props: primes
+      props: {primes}
     }
   }
 }
@@ -28,9 +29,10 @@ export const getServerSideProps: GetServerSideProps<{primes:Primes}> = async (co
 import TableRow from '../components/TableRow'
 
 
-export default function Page({primes}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  debugger
-  console.log("100",primes.values[100])
+export default function Page({primes}: Props) {
+  // debugger
+  console.log(primes)
+  console.log("100",primes[100])
 
   return (
     <div>
@@ -41,7 +43,7 @@ export default function Page({primes}: InferGetServerSidePropsType<typeof getSer
                 </tr>
             </thead>
             <tbody>
-                {primes.values.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
+                {primes.map((index,prime) => <TableRow  key={index.toString()} prime={prime.toString()} index={index.toString()} />)}
             </tbody>
 
         </table>
