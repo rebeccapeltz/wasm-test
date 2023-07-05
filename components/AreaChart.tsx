@@ -35,7 +35,7 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Firt 1000 Prime Numbers',
+            text: 'First 1000 Prime Numbers',
         },
     },
 };
