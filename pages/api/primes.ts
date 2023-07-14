@@ -3,10 +3,8 @@ export const config = { runtime: 'edge' }
 import type { AssemblyExports } from '../../wasm'
 import { NextRequest, NextResponse } from 'next/server';
 
-
-// import type { Prime1000Exports } from '../../wasm'
+// prevent build error on not finding
 // @ts-ignore
-// import addWasm from '../../add.wasm?module'
 import releaseWasm from '../../release.wasm?module'
 
 // const module$ = WebAssembly.instantiate(addWasm)
@@ -15,7 +13,7 @@ const module$ = WebAssembly.instantiate(releaseWasm)
 export default async function handler() {
   const instance = (await module$) as any
   const exports = instance.exports as AssemblyExports
-  const {memory,isPrime,get1000Primes,getFibonacci1000,add}= exports
+  const {memory,get1000Primes}= exports
   get1000Primes();
   // getFibonacci1000();
   const wasmByteMemoryArray = new Uint32Array(memory.buffer);
@@ -30,5 +28,4 @@ export default async function handler() {
     values: primes,
   });
 }
-
 

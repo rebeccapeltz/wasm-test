@@ -1,6 +1,7 @@
-// import type {AssemblyExports} from '../wasm'
+// import type {AssemblyExports} from '../release'
+
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import {AreaChart} from '../components/AreaChart'
+import { AreaChart } from '../components/AreaChart'
 
 // type Primes = {
 //   values: Number[]
@@ -11,18 +12,18 @@ interface Props {
 }
 
 
-export const getServerSideProps: GetServerSideProps<{primes:Number[]}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{ primes: Number[] }> = async (context) => {
   const API_URL = 'https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes';
   const res = await fetch(API_URL)
   const data = await res.json()
   const primes = data.values;
-  if (primes == null){
+  if (primes == null) {
     return {
       notFound: true
     }
   } else {
     return {
-      props: {primes}
+      props: { primes }
     }
   }
 }
@@ -30,14 +31,20 @@ export const getServerSideProps: GetServerSideProps<{primes:Number[]}> = async (
 import TableRow from '../components/TableRow'
 
 
-export default function Page({primes}:Props) {
+export default function Page({ primes }: Props) {
   // console.log(primes)
   // console.log("100",primes[100])
   return (
-    <div>
-        <AreaChart primes={primes} />
+    <div className="container">
+      <div className="grid-container">
+        <div><AreaChart primes={primes} /></div>
+        <div><AreaChart primes={primes} /></div>
+        <div><AreaChart primes={primes} /></div>
+      </div>
 
-        {/* <table>
+
+
+      {/* <table>
             <thead>
                 <tr>
                     <th colSpan={4} className='topnav'>Rendered By Next JS | Client side rendered</th>
@@ -49,7 +56,7 @@ export default function Page({primes}:Props) {
 
         </table> */}
     </div>
-)
+  )
 }
 
 

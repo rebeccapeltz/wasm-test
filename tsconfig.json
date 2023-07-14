@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "wasm.d.ts", "pages/api/primes.ts", "components/Test.tsx.bak", "components/WasmCompnent.tsx.bak"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","pages/api/primes.ts", "components/Test.tsx.bak", "components/WasmCompnent.tsx.bak"],
   "exclude": ["node_modules"]
 }
